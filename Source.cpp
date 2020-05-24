@@ -1,5 +1,5 @@
-//Project 4 AI
-// Created by nick flouty & joey robinson
+// Project 4 AI
+// Created by nick Flouty & Joey Robinson
 // Solves a 4x4 Tic-Tac-Toe board but with new rules: for a player to win, they must have a move in a unique row and column.
 
 #include <iostream>	//use of cout
@@ -425,7 +425,7 @@ int main()
 		<< "3: quit" << endl << ">>";
 	cin >> user;
 
-	while (user != 3 && user == 1 || user == 2)
+	while (user != 3 && (user == 1 || user == 2) )
 	{
 		string input;
 		cout << "Enter the name of a 4x4 Tic-Tac-Toe.txt : ";
@@ -434,8 +434,10 @@ int main()
 		ifstream file;
 		file.open(input);
 
-		vector<string> board(4);			// vector has 4 strings. One for each line.
-		while (!file.eof())					// reads the file into a string vector.
+		// vector has 4 strings. One for each line.
+		vector<string> board(4);
+		// reads the file into a string vector.
+		while (!file.eof())
 		{
 			for (int i = 0; i < 4; i++)
 			{
