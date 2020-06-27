@@ -118,48 +118,51 @@ class Game extends React.Component {
         return false;
     }
 
-    Alpha_Beta(board, alpha, beta, depth, player, bestSuccessor)
+    Alpha_Beta(board, alpha, beta, depth, player)
     {
         // When reaches a leaf node.
         let winningPlayer = {};
         if (this.compare_winning(board, winningPlayer, depth, true)){
-            //console.log(winningPlayer.win, depth);
-            return winningPlayer.win;
+            return [winningPlayer.win, board];
         }
 
         let successors = this.Successors(board, player);
+        let bestBoard = board;
 
         if (player === "ai"){
             let result_value = Number.NEGATIVE_INFINITY;
-            
             for (let i = 0; i < successors.length; i++){
-                let value = this.Alpha_Beta(successors[i], alpha, result_value, depth + 1, "x", bestSuccessor);
+
+                let value = this.Alpha_Beta(successors[i], alpha, beta, depth + 1, "x")[0];
                 
                 if (value > result_value){
                     result_value = value;
-                    bestSuccessor.move = successors[i];
+                    bestBoard = successors[i];
                 }
-                //alpha = Math.max(alpha, value);
-                //if (beta <= alpha)
-                  //  break;
+
+                alpha = Math.max(alpha, value);
+                if (beta <= alpha)
+                    break;
+                
             }
-            return result_value;
+            return [result_value, bestBoard];
         }
         else{
             let result_value = Number.POSITIVE_INFINITY;
-
             for (let i = 0; i < successors.length; i++){
-                let value = this.Alpha_Beta(successors[i], result_value, beta, depth + 1, "ai", bestSuccessor);
+
+                let value = this.Alpha_Beta(successors[i], alpha, beta, depth + 1, "ai")[0];
                 
                 if (value < result_value){
                     result_value = value;
-                    bestSuccessor.move = successors[i];
+                    bestBoard = successors[i];
                 }
-                //beta = Math.min(beta, value);
-                //if (beta <= alpha)
-                  //  break;
+
+                beta = Math.min(beta, value);
+                if (beta <= alpha)
+                    break;
             }
-            return result_value;
+            return [result_value, bestBoard];
         }
     }
 
@@ -176,9 +179,6 @@ class Game extends React.Component {
     handleClick(colIdx, rowIdx) {
         if( this.state.haveAWinner )
             return;
-
-        //if( rowIdx <  0)
-          //  return;
 
         let newBoard = this.state.board.slice();
 
@@ -206,10 +206,9 @@ class Game extends React.Component {
             else if(this.move_counter < 5) {
                 // AI's Turn
                 console.log("AI Thinking...");
-                let bestMove = {};
-                this.Alpha_Beta(newBoard.flat(), Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0, "ai", bestMove)
-                
-                let move = this.Print_BestMove(newBoard.flat(), bestMove.move)
+                let bestBoard = this.Alpha_Beta(newBoard.flat(), Number.NEGATIVE_INFINITY, Number.POSITIVE_INFINITY, 0, "ai")
+                console.log(bestBoard);
+                let move = this.Print_BestMove(newBoard.flat(), bestBoard[1])
                 newBoard[Math.floor(move / 3)][move % 3] = {color: "ai", isOccupied: true};    
 
                 this.setState({
