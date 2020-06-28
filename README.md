@@ -5,7 +5,7 @@ Alpha-Beta Pruning was incorporated to reduce the number of subtrees that are ev
 
 # Install
 - Install node.js from https://nodejs.org
-- In the root folder enter ```npm install``` to install the dependencies.
+- In the root folder of this project enter ```npm install``` to install the dependencies.
 - Run ```npm start```
 
 # Game
