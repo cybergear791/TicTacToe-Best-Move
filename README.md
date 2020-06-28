@@ -1,3 +1,8 @@
+# Desc
+The minmax algorithm was used to find the optimal move for the AI. Letting the AI `O` be the Maximizer Player, and the user `X` be the Minimizer, board states that are a win for the AI returned the value `100 - depth`, and returned `-100 + depth` for winning board states for the User. Facorting the depth of the board state into the minmax value is so that the AI chooses a move that will lead to a sooner win.
+
+Alpha-Beta Pruning was incorporated to reduce the number of subtrees that are evaluated by the minmax function, by not exploring subtrees whose board moves will not be chosen as the optimal move, for their minmax value could not be better than a previous explored subtrees.
+
 # Install
 - In the root folder enter ```npm install``` to install the dependencies.
 - Run ```npm start```
