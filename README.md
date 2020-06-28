@@ -7,6 +7,7 @@ Alpha-Beta Pruning was incorporated to reduce the number of subtrees that are ev
 - Install node.js from https://nodejs.org
 - In the root folder of this project enter ```npm install``` to install the dependencies.
 - Run ```npm start```
+- Open http://localhost:3000 on your web browser to play.
 
 # Game
 You are the `X` and the AI is the `O`.
