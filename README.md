@@ -4,6 +4,7 @@ The minmax algorithm was used to find the optimal move for the AI. Letting the A
 Alpha-Beta Pruning was incorporated to reduce the number of subtrees that are evaluated by the minmax function, by not exploring subtrees whose board moves will not be chosen as the optimal move, for their minmax value could not be better than a previous explored subtrees.
 
 # Install
+- Install node.js from https://nodejs.org
 - In the root folder enter ```npm install``` to install the dependencies.
 - Run ```npm start```
 
